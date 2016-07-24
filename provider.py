@@ -1,6 +1,8 @@
 import datetime
 import random
 import getch
+import os
+import time
 import pdb
 
 
@@ -31,11 +33,13 @@ def engine(content):
 
 	#warm up
 	for char in content:
-		show(char)
+		ans,delay = show(char)
+
 	for i in range(length)[::-1]:
-		show(content[i])
+		ans,delay = show(content[i])
+		
 	for i in range(length)[::-1]:
-		show(content[i])
+		ans,delay = show(content[i])
 
 	#real exercise
 	while 1:
@@ -59,26 +63,32 @@ def engine(content):
 
 
 def show_stat(content, stat):
+	os.system('clear')
 	print 'show statistic for this exercise'
-	print '*'*60
-	print '*'*60
-	print 'character\terror time\terror rate\tavg. reponse time'
-	print '*'*60
-	for i,char in enumerate(content):
-		#try:
-		#	error_rate = stat[i][1]/stat[i][0]
-		#	avg_time = stat[i][2]/stat[i][0]
-		#except ZeroDivisionError:
-		#	print 'the character is ',content[i]
-		#	print stat[i][0],stat[i][1],stat[i][2]
+	print '-'*15*5
+	print '-'*15*5
+	print ' '*((15-len('character'))/2),'character',' '*((15-len('character'))/2),
+	print ' '*((15-len('error time'))/2),'error time',' '*((15-len('error time'))/2),
+	print ' '*((15-len('error rate'))/2),'error rate',' '*((15-len('error rate'))/2),
+	print ' '*((15-len('rsp. time(ms)'))/2),'rsp. time(ms)',' '*((15-len('rsp. time(ms)'))/2)
+	print '-'*15*5
 
-		#pdb.set_trace()
-		print '%c\t%d\t%2f\t%4f'%(char,stat[i][1],stat[i][1]/float(stat[i][0]),stat[i][2]/float(stat[i][0]))
+	for i,char in enumerate(content):
+		print ' '*7,char,' '*7,
+		print ' '*7,stat[i][1],' '*7,
+		if stat[i][0] != 0:
+			print ' '*5,'%5.4f'%(stat[i][1]/float(stat[i][0])),' '*5,
+			print ' '*5,'%5.1f'%(stat[i][2]/float(stat[i][0])),' '*5
+		else:
+			print ' '*7,'-',' '*7,
+			print ' '*7,'-',' '*7
+		#print '%c\t%d\t%2f\t%4f'%(char,stat[i][1],stat[i][1]/float(stat[i][0]),stat[i][2]/float(stat[i][0]))
 		#print char,'\t',stat[i][1],'\t',stat[i][1]/float(stat[i][0])
-		print '*'*60
+		print '-'*15*5
 
 
 def show(char):
+	os.system('clear')
 	print char
 	start = datetime.datetime.now()
 	ans = getch.getch()
@@ -91,4 +101,6 @@ def show(char):
 	elif ans == '1':
 		return (3,duration)
 	else:
+		print 'error, what you enter is:',ans
+		time.sleep(2)
 		return (1,duration)
