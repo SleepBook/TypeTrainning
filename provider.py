@@ -1,5 +1,6 @@
 import datetime
 import random
+import getch
 import pdb
 
 
@@ -21,7 +22,7 @@ def content_generator(mode):
 
 def engine(content):
 	print 'start endless exercise, when you feel it\'s enough',
-	print 'press \'exit\'to exit the program, enter again to start new exercise'
+	print 'press \'2\'to exit the program, enter 1 to start new exercise'
 	
 	length = len(content)
 	stat = []
@@ -80,14 +81,14 @@ def show_stat(content, stat):
 def show(char):
 	print char
 	start = datetime.datetime.now()
-	ans = raw_input()
+	ans = getch.getch()
 	end = datetime.datetime.now()
 	duration = (end-start).total_seconds()*1000
 	if ans == char:
 		return (0,duration)
-	elif ans == 'exit':
+	elif ans == '2':
 		return (4,duration)
-	elif ans == 'again':
+	elif ans == '1':
 		return (3,duration)
 	else:
 		return (1,duration)
