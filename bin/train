@@ -1,10 +1,13 @@
+#!/usr/bin/python
+
 #this is a small tools for improving my typing
 #written by oar, 23/07/2016
 #I'am very sad today, lastnight i see my last close friend off
 #I feel like a real lonely spirit now.
-from provider import *
 
-def typer():
+from typer.provider import *
+
+def type_trainer():
 	print 'welcome to this typing exercise program'
 	while 1:
 		print 'please select the exercise mode'
@@ -25,4 +28,4 @@ def typer():
 
 
 if __name__ == '__main__':
-	typer()
+	type_trainer()
